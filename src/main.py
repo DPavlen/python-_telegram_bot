@@ -3,12 +3,12 @@ import os
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
+from config import Config
 
-from dotenv import load_dotenv
 
-load_dotenv()
+config = Config()
+bot_token = config.bot_token
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -24,7 +24,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(BOT_TOKEN).build()
+    application = ApplicationBuilder().token(bot_token).build()
 
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
